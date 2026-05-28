@@ -1,0 +1,21 @@
+name: Data Schema Code Convention
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sqlfluff-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install SQLFluff
+        run: pip install sqlfluff
+
+      - name: Run SQLFluff
+        run: |
+          sqlfluff lint *.sql --dialect oracle
